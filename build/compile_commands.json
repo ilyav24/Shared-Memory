@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/ilya/Shared-Memory/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/usr/include/opencv4  -g   -std=gnu++14 -o CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o -c /home/ilya/Shared-Memory/SharedMemory.cpp",
+  "file": "/home/ilya/Shared-Memory/SharedMemory.cpp"
+}
+]
