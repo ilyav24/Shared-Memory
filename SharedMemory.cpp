@@ -1,80 +1,57 @@
-#include <iostream>
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-using namespace std;
-using namespace cv;
+#ifdef NO_SHM_ONLINE
+#include <boost/interprocess/managed_mapped_file.hpp>
+#else
+#include <boost/interprocess/managed_shared_memory.hpp>
+#endif
+#include <boost/container/vector.hpp>
+#include <boost/multi_array.hpp>
+// debug, demo output:
+#include <fmt/ranges.h>
+#include <random>
 
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <stdio.h>
-#include <iostream>
+static std::mt19937 prng { std::random_device{}() };
+namespace bip = boost::interprocess;
+namespace bma = boost::multi_array_types;
 
-//#include "2cam.h"
+namespace {
+    #ifdef NO_SHM_ONLINE
+        using Segment = bip::managed_mapped_file;
+    #else
+        using Segment = bip::managed_shared_memory;
+    #endif
 
-int sizeofmat(cv::Mat *mat) {
-    return mat->rows * mat->step;
-}
+    template <typename T>
+    using Alloc = bip::allocator<T, Segment::segment_manager>;
 
-void fill(int *p, int numRows, int numCols)
-{
-    for (int i = 0; i < numRows; i++)
-    {
-        for (int j = 0; j < numCols; j++)
-        {
-           *(p + i*numCols + j) = rand() % 20 + 200;
-        }
-    }
+    template <typename T>
+    using Vector = boost::container::vector<T, Alloc<T> >;
 }
 
 int main() {
-    int numRows = 5, numCols = 6;
+    Segment seg(bip::open_or_create, "my_shared_mem", 1024);
     
-    int **arr;
-    int shmid;
-    static int shmSize = sizeof(int[numRows][numCols]);
-     // ftok to generate unique key
-    key_t key = ftok("shmfile",65);
-   
-    // shmget returns an identifier in shmid
-    shmid = shmget(key,shmSize,0666|IPC_CREAT);
-    if(shmid < 0)
-    {
-      cout<< "shmget" << endl; 
-    }
-  
-    // shmat to attach to shared memory
-    arr = (int**)shmat(shmid,NULL,0);
-    if(arr == NULL)
-    {
-        cout<< "shmat" << endl;
-    }
-    //arr[0][0] = rand() % 20 + 200;
-    // for (int i = 0; i < numRows; i++)
-    // {
-    //     for (int j = 0; j < numCols; j++)
-    //     {
-    //        arr[i][j] = rand() % 20 + 200;
-    //     }
-    // }
-    //cout<< "here" << endl;
-    
-    cout<<"Write Data : ";
-    // for (int i = 0; i < numRows; i++)
-    // {
-    //     for (int j = 0; j < numCols; j++)
-    //     {
-    //         cout << "Element at x[" << i
-    //              << "][" << j << "]: ";
-    //         cout << arr[i][j] <<endl;
-    //     }
-    // }
-  
-    //printf("Data written in memory: %s\n",str);
-      
-    //detach from shared memory 
-    shmdt(arr);
-  
-    return 0;
+    auto rows = 1 + prng()%5;
+    auto cols = 1 + prng()%7;
+
+    auto& backing = *seg.find_or_construct<Vector<double> >("my_backing")
+                        (rows*cols, seg.get_segment_manager());
+
+    // ensure enough backing storage
+    backing.resize(rows*cols); // previous runs might have required less
+    backing.shrink_to_fit();   // optional: might not be optimal
+
+    boost::multi_array_ref<double, 2> data(
+            backing.data(),
+            boost::extents[rows][cols]);
+
+    fmt::print("shape: {} num_elements(): {} free in segment: {}\n",
+            std::vector<int>(data.shape(), data.shape()+2),
+            data.num_elements(),
+            seg.get_free_memory()
+        );
+
+    std::iota(data.origin(), data.origin() + data.num_elements(), 1);
+    data[0][0] = 37;
+
+    fmt::print("{}\n", fmt::join(data, "\n"));
 }

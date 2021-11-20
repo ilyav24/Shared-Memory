@@ -79,6 +79,8 @@ Shared__Memory_EXTERNAL_OBJECTS =
 
 Shared-Memory: CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o
 Shared-Memory: CMakeFiles/Shared-Memory.dir/build.make
+Shared-Memory: /usr/lib/x86_64-linux-gnu/librt.so
+Shared-Memory: /usr/lib/x86_64-linux-gnu/libfmt.a
 Shared-Memory: CMakeFiles/Shared-Memory.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilya/Shared-Memory/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Shared-Memory"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Shared-Memory.dir/link.txt --verbose=$(VERBOSE)
