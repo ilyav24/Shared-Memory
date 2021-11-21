@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o"
+  "CMakeFiles/Shared-Memory.dir/reader.cpp.o"
   "Shared-Memory"
   "Shared-Memory.pdb"
 )

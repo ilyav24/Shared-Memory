@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ilya/Shared-Memory/SharedMemory.cpp
+/home/ilya/Shared-Memory/reader.cpp
 boost/interprocess/managed_mapped_file.hpp
 -
 boost/interprocess/managed_shared_memory.hpp

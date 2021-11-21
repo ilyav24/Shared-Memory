@@ -108,7 +108,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "SharedMemory.cpp",
+			"path" : "reader.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

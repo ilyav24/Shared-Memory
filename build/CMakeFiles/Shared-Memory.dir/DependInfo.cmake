@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ilya/Shared-Memory/SharedMemory.cpp" "/home/ilya/Shared-Memory/build/CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o"
+  "/home/ilya/Shared-Memory/reader.cpp" "/home/ilya/Shared-Memory/build/CMakeFiles/Shared-Memory.dir/reader.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

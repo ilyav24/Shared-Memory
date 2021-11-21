@@ -57,27 +57,27 @@ include CMakeFiles/Shared-Memory.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Shared-Memory.dir/flags.make
 
-CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o: CMakeFiles/Shared-Memory.dir/flags.make
-CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o: ../SharedMemory.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Shared-Memory/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o"
-	/bin/x86_64-linux-gnu-g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o -c /home/ilya/Shared-Memory/SharedMemory.cpp
+CMakeFiles/Shared-Memory.dir/reader.cpp.o: CMakeFiles/Shared-Memory.dir/flags.make
+CMakeFiles/Shared-Memory.dir/reader.cpp.o: ../reader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Shared-Memory/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Shared-Memory.dir/reader.cpp.o"
+	/bin/x86_64-linux-gnu-g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Shared-Memory.dir/reader.cpp.o -c /home/ilya/Shared-Memory/reader.cpp
 
-CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.i"
-	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ilya/Shared-Memory/SharedMemory.cpp > CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.i
+CMakeFiles/Shared-Memory.dir/reader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Shared-Memory.dir/reader.cpp.i"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ilya/Shared-Memory/reader.cpp > CMakeFiles/Shared-Memory.dir/reader.cpp.i
 
-CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.s"
-	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ilya/Shared-Memory/SharedMemory.cpp -o CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.s
+CMakeFiles/Shared-Memory.dir/reader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Shared-Memory.dir/reader.cpp.s"
+	/bin/x86_64-linux-gnu-g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ilya/Shared-Memory/reader.cpp -o CMakeFiles/Shared-Memory.dir/reader.cpp.s
 
 # Object files for target Shared-Memory
 Shared__Memory_OBJECTS = \
-"CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o"
+"CMakeFiles/Shared-Memory.dir/reader.cpp.o"
 
 # External object files for target Shared-Memory
 Shared__Memory_EXTERNAL_OBJECTS =
 
-Shared-Memory: CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o
+Shared-Memory: CMakeFiles/Shared-Memory.dir/reader.cpp.o
 Shared-Memory: CMakeFiles/Shared-Memory.dir/build.make
 Shared-Memory: /usr/lib/x86_64-linux-gnu/librt.so
 Shared-Memory: /usr/lib/x86_64-linux-gnu/libfmt.a

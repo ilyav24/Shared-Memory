@@ -123,32 +123,32 @@ Shared-Memory/fast:
 	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/build
 .PHONY : Shared-Memory/fast
 
-SharedMemory.o: SharedMemory.cpp.o
+reader.o: reader.cpp.o
 
-.PHONY : SharedMemory.o
+.PHONY : reader.o
 
 # target to build an object file
-SharedMemory.cpp.o:
-	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o
-.PHONY : SharedMemory.cpp.o
+reader.cpp.o:
+	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/reader.cpp.o
+.PHONY : reader.cpp.o
 
-SharedMemory.i: SharedMemory.cpp.i
+reader.i: reader.cpp.i
 
-.PHONY : SharedMemory.i
+.PHONY : reader.i
 
 # target to preprocess a source file
-SharedMemory.cpp.i:
-	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.i
-.PHONY : SharedMemory.cpp.i
+reader.cpp.i:
+	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/reader.cpp.i
+.PHONY : reader.cpp.i
 
-SharedMemory.s: SharedMemory.cpp.s
+reader.s: reader.cpp.s
 
-.PHONY : SharedMemory.s
+.PHONY : reader.s
 
 # target to generate assembly for a file
-SharedMemory.cpp.s:
-	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.s
-.PHONY : SharedMemory.cpp.s
+reader.cpp.s:
+	$(MAKE) -f CMakeFiles/Shared-Memory.dir/build.make CMakeFiles/Shared-Memory.dir/reader.cpp.s
+.PHONY : reader.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Shared-Memory"
-	@echo "... SharedMemory.o"
-	@echo "... SharedMemory.i"
-	@echo "... SharedMemory.s"
+	@echo "... reader.o"
+	@echo "... reader.i"
+	@echo "... reader.s"
 .PHONY : help
 
 

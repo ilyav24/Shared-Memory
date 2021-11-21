@@ -1,1 +1,1 @@
-/bin/x86_64-linux-gnu-g++-9   -pthread -g   CMakeFiles/Shared-Memory.dir/SharedMemory.cpp.o  -o Shared-Memory  /usr/lib/x86_64-linux-gnu/librt.so /usr/lib/x86_64-linux-gnu/libfmt.a 
+/bin/x86_64-linux-gnu-g++-9   -pthread -g   CMakeFiles/Shared-Memory.dir/reader.cpp.o  -o Shared-Memory  /usr/lib/x86_64-linux-gnu/librt.so /usr/lib/x86_64-linux-gnu/libfmt.a 
