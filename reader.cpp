@@ -1,41 +1,57 @@
-#include <iostream>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <stdio.h>
-using namespace std;
-  
-int main()
-{
-    int numRows = 5, numCols = 6;
-    int shmSize = sizeof(int[numRows][numCols]);
+#ifdef NO_SHM_ONLINE
+#include <boost/interprocess/managed_mapped_file.hpp>
+#else
+#include <boost/interprocess/managed_shared_memory.hpp>
+#endif
+#include <boost/container/vector.hpp>
+#include <boost/multi_array.hpp>
+// debug, demo output:
+#include <fmt/ranges.h>
+#include <random>
 
-    // ftok to generate unique key
-    key_t key = ftok("shmfile",65);
-  
-    // shmget returns an identifier in shmid
-    int shmid = shmget(key,shmSize,0666|IPC_CREAT);
-  
-    // shmat to attach to shared memory
-    int **str = (int**) shmat(shmid,(void*)0,0);
-  
-    printf("Data read from memory: %s\n",str);
+static std::mt19937 prng { std::random_device{}() };
+namespace bip = boost::interprocess;
+namespace bma = boost::multi_array_types;
 
-    // output each array element's value
-    for (int i = 0; i < numRows; i++)
-    {
-        for (int j = 0; j < numCols; j++)
-        {
-            cout << "Element at x[" << i
-                 << "][" << j << "]: ";
-            cout << str[i][j]<<endl;
-        }
-    }
-      
-    //detach from shared memory 
-    shmdt(str);
+namespace {
+    #ifdef NO_SHM_ONLINE
+        using Segment = bip::managed_mapped_file;
+    #else
+        using Segment = bip::managed_shared_memory;
+    #endif
+
+    template <typename T>
+    using Alloc = bip::allocator<T, Segment::segment_manager>;
+
+    template <typename T>
+    using Vector = boost::container::vector<T, Alloc<T> >;
+}
+
+int main() {
+    Segment seg(bip::open_only, "my_shared_mem");
     
-    // destroy the shared memory
-    shmctl(shmid,IPC_RMID,NULL);
-     
-    return 0;
+    auto rows = 3;
+    auto cols = 3;
+
+    auto& backing = *seg.find_or_construct<Vector<double> >("my_backing")
+                        (rows*cols, seg.get_segment_manager());
+
+    // ensure enough backing storage
+    //backing.resize(rows*cols); // previous runs might have required less
+    //backing.shrink_to_fit();   // optional: might not be optimal
+
+    boost::multi_array_ref<double, 2> data(
+            backing.data(),
+            boost::extents[rows][cols]);
+
+    fmt::print("shape: {} num_elements(): {} free in segment: {}\n",
+            std::vector<int>(data.shape(), data.shape()+2),
+            data.num_elements(),
+            seg.get_free_memory()
+        );
+
+    //std::iota(data.origin(), data.origin() + data.num_elements(), 1);
+    //data[0][0] = 37;
+
+    fmt::print("{}\n", fmt::join(data, "\n"));
 }

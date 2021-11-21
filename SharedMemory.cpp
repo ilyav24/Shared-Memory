@@ -28,10 +28,18 @@ namespace {
 }
 
 int main() {
+     //Remove shared memory on construction and destruction
+    // struct shm_remove
+    // {
+    //   shm_remove() { bip::shared_memory_object::remove("my_shared_mem"); }
+    //   ~shm_remove() { bip::shared_memory_object::remove("my_shared_mem"); }
+    // } remover;
     Segment seg(bip::open_or_create, "my_shared_mem", 1024);
     
-    auto rows = 1 + prng()%5;
-    auto cols = 1 + prng()%7;
+    // auto rows = 1 + prng()%5;
+    // auto cols = 1 + prng()%7;
+    auto rows = 3;
+    auto cols = 3;
 
     auto& backing = *seg.find_or_construct<Vector<double> >("my_backing")
                         (rows*cols, seg.get_segment_manager());

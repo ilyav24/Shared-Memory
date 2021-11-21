@@ -16,7 +16,7 @@ link_libraries("/usr/lib/x86_64-linux-gnu/libfmt.a")
 #include_directories ("/home/ilya/opencv/vcpkg/installed/x64-linux/include")
 
 # Add main.cpp file of project root directory as source file
-set(SOURCE_FILES SharedMemory.cpp)
+set(SOURCE_FILES reader.cpp)
 
 # Add executable target with source files listed in SOURCE_FILES variable
 add_executable(Shared-Memory ${SOURCE_FILES})
